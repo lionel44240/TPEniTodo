@@ -1,19 +1,28 @@
 package fr.eni.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "TACHE")
-public class MTache {
+public class MTache implements Serializable{
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +38,16 @@ public class MTache {
 	@Column(name = "date")
 	private java.util.Date Date;
 	
+	@Column(name = "etat")
+	private Boolean etat;
 	
-    @ManyToOne 
+	@ManyToOne 
     @JoinColumn(name="user")
     private MUser user;
     
-    @ManyToOne 
+    @ManyToMany 
     @JoinColumn(name="categorie")
-    private MCategorie categorie;
+    private List<MCategorie> categorie;
     
     
 	public int getId() {
@@ -78,6 +89,16 @@ public class MTache {
 		Date = date;
 	}
 
+	
+	public Boolean getEtat() {
+		return etat;
+	}
+
+
+	public void setEtat(Boolean etat) {
+		this.etat = etat;
+	}
+
 
 	public MUser getUser() {
 		return user;
@@ -89,13 +110,24 @@ public class MTache {
 	}
 
 
-	public MCategorie getCategorie() {
+	public List<MCategorie> getCategorie() {
 		return categorie;
 	}
 
 
-	public void setCategorie(MCategorie categorie) {
+	public void setCategorie(List<MCategorie> categorie) {
 		this.categorie = categorie;
+	}
+
+
+	public MTache(String type, String description, java.util.Date date, Boolean etat) {
+	
+		this.type = type;
+		this.description = description;
+		Date = date;
+		this.etat = etat;
+
+	
 	}
 
 

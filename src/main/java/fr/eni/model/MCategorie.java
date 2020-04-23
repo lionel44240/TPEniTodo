@@ -1,21 +1,29 @@
 package fr.eni.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CATEGORIE")
-public class MCategorie {
+public class MCategorie implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -27,9 +35,10 @@ public class MCategorie {
 	@ManyToOne
     private MUser user ;
 
-	@OneToMany
+
+	@ManyToMany (cascade = CascadeType.ALL)
 	@JoinColumn(name="listTache")
-    private Collection<MTache> taches ;
+    private Collection<MTache> taches;
 	
 	
 	
@@ -77,6 +86,12 @@ public class MCategorie {
 
 	public void setTaches(Collection<MTache> taches) {
 		this.taches = taches;
+	}
+
+
+
+	public MCategorie(String libelle) {
+		this.libelle = libelle;
 	}
 
 
