@@ -24,16 +24,18 @@ public class CategorieDAO {
 	        throw new DAOException("Erreur lors de l'ajout de la categorie " + categorie + " : " + e.getMessage());
 	    }
 	}
+	
+
 
 	 
 
-	public List<MUser> selectByUser(MUser utilisateur) {
+	
+
+	public List<MCategorie> selectByUser(MUser utilisateur) {
 	    
-	        String req = "Select Object(c) from MCategorie c WHERE c.user LIKE :user";
-	        return UtilDAO.getEntityManager().createQuery(req, MUser.class).setParameter("user", "%" + utilisateur + "%").getResultList();
-	    }
-
-	 
+        String req = "Select Object(c) from MCategorie c WHERE c.user LIKE :user";
+        return UtilDAO.getEntityManager().createQuery(req, MCategorie.class).setParameter("user", "%" + utilisateur + "%").getResultList();
+    }
 
 	public List<MCategorie> selectAll()
 	{

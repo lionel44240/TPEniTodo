@@ -24,9 +24,6 @@ public class TodoMain {
 		UserDAO userDAO = new UserDAO();
         CategorieDAO categorieDAO = new CategorieDAO();
         MTache tache = new MTache();
-        List<MCategorie> categories1 = new ArrayList<MCategorie>();
-        List<MCategorie> categories2 = new ArrayList<MCategorie>();
-        List<MCategorie> categories3 = new ArrayList<MCategorie>();
         List<MTache> listTaches1 = new ArrayList<MTache>();
         List<MTache> listTaches2 = new ArrayList<MTache>();
         List<MTache> listTaches3 = new ArrayList<MTache>();
@@ -51,10 +48,6 @@ public class TodoMain {
 
 
         try {
-            // AJout des categories dans une liste
-            categories1.add(categorie1);
-            categories2.add(categorie2);
-            categories3.add(categorie3);
             
 			 // AJout des categories dans une liste
             listTaches1.add(tache1);
@@ -63,9 +56,9 @@ public class TodoMain {
             listTaches4.add(tache4);
 			            
             // Ajout des catégories à chaque utilisateur
-            utilisateur1.setCategories(categories1);
-            utilisateur2.setCategories(categories2);
-            utilisateur3.setCategories(categories3); 
+            utilisateur1.addCategorie(categorie1);
+            utilisateur2.addCategorie(categorie2);
+            utilisateur3.addCategorie(categorie3); 
             
             // Ajout des catégories à chaque utilisateur
             utilisateur1.setTaches(listTaches1);
@@ -82,10 +75,21 @@ public class TodoMain {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        
+		/*
+		 * List<MCategorie> categorieListByUser =
+		 * categorieDAO.selectByUser(utilisateur1);
+		 * 
+		 * for (MCategorie mCategorie : categorieListByUser) {
+		 * System.out.println(mCategorie.getLibelle()); }
+		 */
+        
 
+        List<MCategorie> categorieList =  categorieDAO.selectAll();
  
-
-        System.out.println(categorieDAO.selectAll());
+        for (MCategorie mCategorie : categorieList) {
+        	System.out.println(mCategorie.getLibelle());
+		}
 		
 	}
 

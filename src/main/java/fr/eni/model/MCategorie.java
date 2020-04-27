@@ -32,12 +32,12 @@ public class MCategorie implements Serializable {
 	@Column(name = "LIBELLE")
 	private String libelle;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="util_id")
     private MUser user ;
-
-
-	@ManyToMany (cascade = CascadeType.ALL)
-	@JoinColumn(name="listTache")
+	
+	
+	@ManyToMany (cascade = CascadeType.ALL, mappedBy = "categorie")
     private Collection<MTache> taches;
 	
 	

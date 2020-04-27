@@ -1,6 +1,7 @@
 package fr.eni.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -41,11 +43,10 @@ public class MUser implements Serializable {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="listCategories")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     private List<MCategorie> categories ;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="listTache")
     private List<MTache> taches ;
 	
@@ -82,8 +83,11 @@ public class MUser implements Serializable {
 
 	
 	public void setCategories(List<MCategorie> categories) {
-		this.categories = categories;
-	}
+	this.categories = categories;
+    for(MCategorie categorie: categories) {
+    	categorie.setUser(this);
+    }
+}
 
 
 
@@ -96,6 +100,11 @@ public class MUser implements Serializable {
 	public void setTaches(List<MTache> taches) {
 		this.taches = taches;
 	}
+	
+	
+	public void addCategorie(MCategorie categorie) {
+		this.categories.add(categorie);
+	}
 
 
 
@@ -104,11 +113,14 @@ public class MUser implements Serializable {
 		this.lastName = lastName;
 		this.login = login;
 		this.password = password;
-
+		this.categories = new ArrayList<MCategorie>();
+		this.taches = new ArrayList<MTache>();
 	}
 
 
 	public MUser() {
+		this.categories = new ArrayList<MCategorie>();
+		this.taches = new ArrayList<MTache>();
 	}
 	
 	

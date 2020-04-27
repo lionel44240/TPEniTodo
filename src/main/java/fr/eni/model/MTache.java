@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -46,7 +47,7 @@ public class MTache implements Serializable{
     private MUser user;
     
     @ManyToMany 
-    @JoinColumn(name="categorie")
+    @JoinTable( name = "TacheCategorie", joinColumns = @JoinColumn(name="tacheId"), inverseJoinColumns = @JoinColumn(name="categorieId"))
     private List<MCategorie> categorie;
     
     
