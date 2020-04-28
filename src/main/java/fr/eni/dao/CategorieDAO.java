@@ -31,10 +31,17 @@ public class CategorieDAO {
 
 	
 
-	public List<MCategorie> selectByUser(MUser utilisateur) {
+	public List<MCategorie> selectCategorieByUser( MUser utilisateur) {
 	    
-        String req = "Select Object(c) from MCategorie c WHERE c.user LIKE :user";
-        return UtilDAO.getEntityManager().createQuery(req, MCategorie.class).setParameter("user", "%" + utilisateur + "%").getResultList();
+        String req = "Select c from MCategorie c WHERE c.user.id = :utilisateur";
+        try {
+        	return UtilDAO.getEntityManager().createQuery(req, MCategorie.class).setParameter("utilisateur",utilisateur.getId()).getResultList();
+		}
+        catch (Exception e) {
+				System.out.println(e);
+		}
+		return null;
+        
     }
 
 	public List<MCategorie> selectAll()

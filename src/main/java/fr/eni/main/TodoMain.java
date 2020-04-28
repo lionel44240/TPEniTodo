@@ -76,21 +76,22 @@ public class TodoMain {
             System.out.println(e.getMessage());
         }
         
+		
+		 List<MCategorie> categorieListByUser =
+		 categorieDAO.selectCategorieByUser(utilisateur1);
+		 
+		 for (MCategorie mCategorie : categorieListByUser) {
+		 System.out.println(mCategorie.getLibelle()); }
+		 
+		 
+        
+		}
 		/*
-		 * List<MCategorie> categorieListByUser =
-		 * categorieDAO.selectByUser(utilisateur1);
+		 * List<MCategorie> categorieList = categorieDAO.selectAll();
 		 * 
-		 * for (MCategorie mCategorie : categorieListByUser) {
+		 * for (MCategorie mCategorie : categorieList) {
 		 * System.out.println(mCategorie.getLibelle()); }
 		 */
-        
-
-        List<MCategorie> categorieList =  categorieDAO.selectAll();
- 
-        for (MCategorie mCategorie : categorieList) {
-        	System.out.println(mCategorie.getLibelle());
-		}
-		
-	}
+	
 
 }

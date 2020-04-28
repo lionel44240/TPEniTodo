@@ -33,7 +33,7 @@ public class MCategorie implements Serializable {
 	private String libelle;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="util_id")
+    @JoinColumn(name="user")
     private MUser user ;
 	
 	

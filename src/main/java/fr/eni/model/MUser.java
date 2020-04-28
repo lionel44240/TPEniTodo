@@ -104,6 +104,7 @@ public class MUser implements Serializable {
 	
 	public void addCategorie(MCategorie categorie) {
 		this.categories.add(categorie);
+		categorie.setUser(this);
 	}
 
 

@@ -1,5 +1,6 @@
 package fr.eni.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -43,7 +44,18 @@ public class TacheDAO {
 		}
 	
 	public List<MTache> finByIdCategorie(int idCategorie) {
-		String req = "Select Object(l) from TACHE l WHERE l.categorie LIKE :idcat";
+		String req = "Select Object(l) from MTache l WHERE l.categorie LIKE :idcat";
 		return UtilDAO.getEntityManager().createQuery(req, MTache.class).setParameter("idcat", "%" + idCategorie + "%").getResultList();
+	}
+	
+	
+	public List<MTache> finByIdUser(int idUser) {
+		String req = "Select Object(l) from MTache l WHERE l.user LIKE :iduser";
+		return UtilDAO.getEntityManager().createQuery(req, MTache.class).setParameter("iduser", "%" + idUser + "%").getResultList();
+	}
+	
+	public List<MTache> finByDate(Date date) {
+		String req = "Select Object(l) from MTache l WHERE l.date LIKE :date";
+		return UtilDAO.getEntityManager().createQuery(req, MTache.class).setParameter("date", "%" + date + "%").getResultList();
 	}
 }
